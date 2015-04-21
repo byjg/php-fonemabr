@@ -24,6 +24,6 @@ $fonema->converte('brasil');
 ## Sugestão de usos:
 
 Uma possível utilização é criar um segundo campo no banco de dados no qual o fonema será armazenado. 
-Assim sempre que salvar a palavra original você também salva a palavra com fonema. 
+Sempre que salvar a palavra original você também salva a palavra com fonema.
 
-Assim, você poderá pesquisar tanto a palavra original quanto a palavra simplifica com o Fonema. 
+Dessa forma você poderá pesquisar tanto a palavra original quanto a palavra simplifica com o Fonema.
