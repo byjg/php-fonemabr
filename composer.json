@@ -8,7 +8,9 @@
       "email": "joao@byjg.com.br"
     }
   ],
-  "require": {},
+  "require": {
+    "byjg/convert": "^1.0"
+  },
   "require-dev": {
     "phpunit/phpunit": "5.7.*|6.5.*"
   },

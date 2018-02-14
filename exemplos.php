@@ -39,5 +39,5 @@ $lista = [
 ];
 
 foreach ($lista as $palavra) {
-    echo $palavra . ": " . $fonema->converte($palavra) . "\n";
+    echo $palavra . ": " . $fonema->convert($palavra) . "\n";
 }

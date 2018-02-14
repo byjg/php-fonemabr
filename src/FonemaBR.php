@@ -2,166 +2,124 @@
 
 namespace ByJG;
 
+use ByJG\Convert\FromUTF8;
+
 class FonemaBR
 {
 
-    public function converte($text)
+    public function getRules()
     {
-        $text = strtoupper(utf8_decode($text)); // padroniza todas as letras em maiusculo
-        $vog = ["A", "E", "I", "O", "U", "a", "e", "i", "o", "u"];
+        $rules = new Rules();
+        $rules
+            ->add(" ", " ", true)
+            ->add("B", "B", true)
+            ->add("C", "K", true)
+            ->add("CH", "X", true)
+            ->add("CE", "SSE", true)
+            ->add("CI", "SSI", true)
+            ->add("CC", "KSS", true)
+            ->add("D", "D", true)
+            ->add("^ES", "EX", true)
+            ->addSame("^EX", "^ES")
+            ->add("F", "F", true)
+            ->add("GA", "GA", false)
+            ->add("GE", "JE", false)
+            ->add("GI", "JI", false)
+            ->add("GO", "GO", false)
+            ->add("GU", "GU", true)
+            ->add("GH", "G", true)
+            ->add("G", "G", true)
+            ->add("H", "", true)
+            ->add("J", "J", true)
+            ->addSame("K", "C")
+            ->add("L", "L", true)
+            ->add("NA", "NA", true)
+            ->add("NE", "NE", true)
+            ->add("NI", "NI", true)
+        ;
+
+        $rules
+            ->add("NO", "NO", true)
+            ->add("NU", "NU", true)
+            ->add("NH", "N", true)
+            ->add("N", "M", false)
+            ->add("N$", "M", false)
+            ->add("M", "M", true)
+            ->add("PH", "F", true)
+            ->add("P", "P", true)
+            ->add("Q", "K", false)
+            ->add("R", "R", true)
+            ->add("RR", "RR", true)
+            ->add("R$", "", false)
+            ->add("SX", "X", true)
+            ->add("SS", "SS", true)
+            ->add("SH", "X", true)
+            ->add("^SA", "SSA", false)
+            ->add("^SE", "SSE", false)
+            ->add("^SI", "SSI", false)
+            ->add("^SO", "SSO", false)
+            ->add("^SU", "SSU", false)
+            ->add("S", "Z", true)
+            ->add("T", "T", true)
+            ->add("V", "V", true)
+            ->add("X", "X", true)
+            ->add("WA", "VA", false)
+        ;
+
+        $rules
+            ->add("WE", "VE", false)
+            ->add("WI", "VI", false)
+            ->add("WO", "VO", false)
+            ->add("WU", "VU", false)
+            ->add("W", "U", true)
+            ->add("Z", "S", true)
+            ->add("ZA", "ZA", false)
+            ->add("ZE", "ZE", false)
+            ->add("ZI", "ZI", false)
+            ->add("ZO", "ZO", false)
+            ->add("ZU", "ZU", false)
+        ;
+
+        return $rules;
+    }
+
+    /**
+     * @param $text
+     * @return string
+     */
+    public function convert($text)
+    {
+        $rules = $this->getRules();
+
+        $text = strtoupper(FromUTF8::onlyAscii(FromUTF8::removeAccent($text)));
         $result = "";
 
-        for ($i = 0; $i < strlen($text); $i++) { // percorre toda a string
-            $previous = isset($text[$i - 1]) ? $text[$i - 1] : '^';
-            $current = $text[$i];
-            $next = isset($text[$i + 1]) ? $text[$i + 1] : '$';
+        $ipos = 0;
+        $expectVogal = true;
+        while ($ipos < strlen($text)) {
+            $first = isset($text[$ipos - 1]) ? "" : '^';
+            $previous = isset($text[$ipos - 1]) ? $text[$ipos - 1] : '^';
+            $current = $text[$ipos];
+            $next = isset($text[$ipos + 1]) ? $text[$ipos + 1] : '$';
 
-            // Aqui é feita a validação
-            switch ($current) {
-                case ' ':
-                    $result .= ' ';
-                    break;
-                case 'B':
-                case 'b':
-                    $result .= 'B';
-                    break;
-                case 'C':
-                case 'c':
-                    if ($next == 'H') {
-                        $result .= 'X';
-                        $i++;
-                    } elseif (($next == 'E') || ($next == 'I')) {
-                        $result .= 'SS';
-                        $i++;
-                    } else {
-                        $result .= 'K';
-                    }
-                    break;
-                case 'Ç':
-                case 'ç':
-                case chr(231): // Cedilha minusculo
-                case chr(199): // Cedilha maiúsculo
-                    $result .= 'SS';
-                    break;
-                case 'D':
-                case 'd':
-                    $result .= 'D';
-                    break;
-                case "E":
-                case "e":
-                    if ($i == 0 && ($next == 'S' || $next == 'X')) {
-                        $result .= 'X';
-                        $i++;
-                    }
-                    break;
-                case 'F':
-                case 'f':
-                    $result .= 'F';
-                    break;
-                case 'G':
-                case 'g':
-                    $result .= 'G';
-                    break;
-                case 'J':
-                case 'j':
-                    $result .= 'J';
-                    break;
-                case 'K':
-                case 'k':
-                    $result .= 'K';
-                    break;
-                case 'L':
-                case 'l':
-                    $result .= 'L';
-                    break;
-                case 'M':
-                case 'm':
-                    $result .= 'M';
-                    break;
-                case 'N':
-                case 'n':
-                    if (($next == '$') || (!in_array($next, $vog) && $next != 'H')) {
-                        $result .= 'M';
-                    } else {
-                        $result .= 'N';
-                    }
-                    break;
-                case 'P':
-                case 'p':
-                    if ($next == 'H') {
-                        $result .= 'F';
-                        $i++;
-                    } else {
-                        $result .= 'P';
-                    }
-                    break;
-                case 'Q':
-                case 'q':
-                    $result .= 'K';
-                    break;
-                case 'R':
-                case 'r':
-                    if ($next == "$" && in_array($previous, $vog)) {
-                        $result .= '';
-                        $i++;
-                    } else {
-                        $result .= 'R';
-                    }
-                    break;
-                case 'S':
-                case 's':
-                    if ($next == 'H') {
-                        $result .= 'X';
-                        $i++;
-                    } elseif ($next == 'S') {
-                        $result .= 'SS';
-                        $i++;
-                    } elseif (($i == 0) && (in_array($next, $vog))) {
-                        $result .= 'SS';
-                        $i++;
-                    } else {
-                        $result .= 'Z';
-                    }
-                    break;
-                case 'T':
-                case 't':
-                    $result .= 'T';
-                    break;
-                case 'V':
-                case 'v':
-                    $result .= 'V';
-                    break;
-                case 'X':
-                case 'x':
-                    $result .= 'X';
-                    break;
-                case 'W':
-                case 'w':
-                    if (in_array($next, $vog)) {
-                        $result .= 'V';
-                        $i++;
-                    }
-                    break;
-                case 'Z':
-                case 'z':
-                    if (!in_array($next, $vog)) {
-                        $result .= 'S';
-                        $i++;
-                    } else {
-                        if ($next == '') {
-                            $result .= 'S';
-                            $i++;
-                        } else {
-                            $result .= 'Z';
-                        }
-                    }
-                    break;
+            if ($current === $previous) {
+                $ipos += 1;
+                continue;
+            }
 
-                default:
-                    break;
+            $rule = $rules->get($first, $current, $next);
+            if ($expectVogal && $rule["move"] === 1 && strpos("AEIOU", $current) !== false) {
+                $rule = [
+                    "default" => $current,
+                    "move" => 1,
+                    "vogal" => true
+                ];
+            }
 
-            } // END_SWITCH
-        } // END _FOR
+            $result .= $rule["default"];
+            $ipos += $rule["move"];
+            $expectVogal = $rule["vogal"];
+        }
 
         return $result;
     } // END_METHOD
