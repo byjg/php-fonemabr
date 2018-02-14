@@ -5,38 +5,39 @@ require 'vendor/autoload.php';
 $fonema = new \ByJG\FonemaBR();
 
 $lista = [
-	"ambulancia",
-	"anbulancia",
-	"enfase",
-	"emfase",
-	"pitomba",
-	"pitonba",
+    "ambulancia",
+    "anbulancia",
+    "enfase",
+    "emfase",
+    "pitomba",
+    "pitonba",
 
-	"praça",
-	"PRAÇA",
-	"vagner",
-	"vagrant",
-	"arranhado",
-	"arranado",
-	"brazilia",
-	"brasilia",
-	"brasil",
-	"hortolândia",
-	"chave",
-	"chavear",
-	"chuva",
-	"exclarecido",  // RESOLVER
-	"esclarecido",  // RESOLVER
-	"mexe",
-	"mesa",
-	"casa",
-	"facção",  // Retirar acentos. Está bagunçando.
-	"sessão",
-	"seção",
-	"áéíóúàèìòùãẽĩõũâêîôûäëïöü",  // Resolver!
+    "praça",
+    "praças",
+    "PRAÇA",
+    "vagner",
+    "vagrant",
+    "arranhado",
+    "arranado",
+    "brazilia",
+    "brasilia",
+    "brasil",
+    "hortolândia",
+    "chave",
+    "chavear",
+    "chuva",
+    "exclarecido",  // RESOLVER
+    "esclarecido",  // RESOLVER
+    "mexe",
+    "mesa",
+    "caça",
+    "casa",
+    "facção",  // Retirar acentos. Está bagunçando.
+    "sessão",
+    "seção",
+    "áéíóúàèìòùãẽĩõũâêîôûäëïöü",  // Resolver!
 ];
 
-foreach($lista as $palavra)
-{
-	echo $palavra . ": " . $fonema->converte($palavra) . "\n";
+foreach ($lista as $palavra) {
+    echo $palavra . ": " . $fonema->converte($palavra) . "\n";
 }

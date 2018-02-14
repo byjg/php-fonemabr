@@ -1,17 +1,18 @@
 {
-    "name": "byjg/fonemabr",
-    "description": "O Fonema BR tem por objetivo criar uma simplificação de palavras de tal forma que erros de ortografia e vogais não interfiram na busca",
-    "authors": [
-        {
-            "name": "jg",
-            "email": "joao@byjg.com.br"
-        }
-    ],
-	"version": "1.0.0",
-    "require": {},
-    "autoload": {
-        "psr-4": {
-            "ByJG\\": "src/"
-        }
+  "name": "byjg/fonemabr",
+  "license": "MIT",
+  "description": "O Fonema BR tem por objetivo criar uma simplificação de palavras de tal forma que erros de ortografia e vogais não interfiram na busca",
+  "authors": [
+    {
+      "name": "jg",
+      "email": "joao@byjg.com.br"
     }
+  ],
+  "version": "1.0.0",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "ByJG\\": "src/"
+    }
+  }
 }
