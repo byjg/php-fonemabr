@@ -8,8 +8,10 @@
       "email": "joao@byjg.com.br"
     }
   ],
-  "version": "1.0.0",
   "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "5.7.*|6.5.*"
+  },
   "autoload": {
     "psr-4": {
       "ByJG\\": "src/"
