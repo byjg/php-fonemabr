@@ -97,8 +97,8 @@ class FonemaBR
         $ipos = 0;
         $expectVogal = true;
         while ($ipos < strlen($text)) {
-            $first = isset($text[$ipos - 1]) ? "" : '^';
-            $previous = isset($text[$ipos - 1]) ? $text[$ipos - 1] : '^';
+            $first = (($ipos > 0) ? "" : '^');
+            $previous = (($ipos > 0) ? $text[$ipos - 1] : '^');
             $current = $text[$ipos];
             $next = isset($text[$ipos + 1]) ? $text[$ipos + 1] : '$';
 
