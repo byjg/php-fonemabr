@@ -16,7 +16,7 @@ fazer um pull request*
 ## Exemplos
 
 ```php
-$fonema = new \ByJG\FonemaBR();
+$fonema = new \ByJG\BR\FonemaBR();
 
 // Abaixo, será produzido o mesmo resultado: BRZL
 $fonema->converte('brasília');

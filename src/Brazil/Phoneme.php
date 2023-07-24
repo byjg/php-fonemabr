@@ -1,10 +1,10 @@
 <?php
 
-namespace ByJG;
+namespace ByJG\WordProcess\Brazil;
 
-use ByJG\Convert\FromUTF8;
+use ByJG\WordProcess\Rules;
 
-class FonemaBR
+class Phoneme
 {
 
     public function getRules()
@@ -70,8 +70,10 @@ class FonemaBR
             ->add("GU", "GU", true)
             ->add("GH", "G", true)
             ->add("^H", "", true)
+            ->add("H([^AEIOU])", "{1}")
             ->add("J", "J", true)
             ->add("L", "L", true)
+            ->add("LH", "LH", true)
             ->add("N", "N", true)
             ->add("NH", "NH", true)
             ->add("N$", "M", false)

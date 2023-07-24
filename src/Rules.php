@@ -1,6 +1,6 @@
 <?php
 
-namespace ByJG;
+namespace ByJG\WordProcess;
 
 use ByJG\Convert\FromUTF8;
 

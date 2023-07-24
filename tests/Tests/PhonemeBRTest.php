@@ -2,13 +2,14 @@
 
 namespace Tests;
 
-use ByJG\FonemaBR;
+use ByJG\WordProcess\Brazil\Phoneme;
+use ByJG\WordProcess\Brazil\Soundex;
 
 if (!class_exists('\PHPUnit\Framework\TestCase')) {
     class_alias('\PHPUnit_Framework_TestCase', '\PHPUnit\Framework\TestCase');
 }
 
-class FonemaBRTest extends \PHPUnit\Framework\TestCase
+class PhonemeBRTest extends \PHPUnit\Framework\TestCase
 {
     public function dataProvider()
     {
@@ -55,6 +56,7 @@ class FonemaBRTest extends \PHPUnit\Framework\TestCase
             ["pão", "PAUM"],
             ["avião", "AVIAUM"],
             ["aviões", "AVIAUM"],
+            ["Ana Carolina Kuhnen", 'a']
         ];
     }
 
@@ -65,8 +67,18 @@ class FonemaBRTest extends \PHPUnit\Framework\TestCase
      */
     public function testFonema($input, $expected)
     {
-        $fonema = new FonemaBR();
+        $fonema = new Phoneme();
         $actual = $fonema->convert($input);
         $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @dataProvider dataProvider
+     * @param $input
+     * @param $expected
+     */
+    public function testSoundex($input, $expected)
+    {
+        $this->assertEquals($input, Soundex::process($input));
     }
 }
