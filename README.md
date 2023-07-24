@@ -1,7 +1,7 @@
 # Fonema BR
 
 [![Opensource ByJG](https://img.shields.io/badge/opensource-byjg.com-brightgreen.svg)](http://opensource.byjg.com)
-[![Build Status](https://travis-ci.org/byjg/fonemabr.svg?branch=master)](https://travis-ci.org/byjg/fonemabr)
+[![Build Status](https://travis-ci.com/byjg/fonemabr.svg?branch=master)](https://travis-ci.com/byjg/fonemabr)
 
 O Fonema BR tem por objetivo criar uma simplificação de palavras de tal forma que erros de ortografia e
 vogais não interfiram na busca. Dessa forma, é possível criar sistemas de buscas mais aproximados com o 
@@ -13,7 +13,7 @@ apenas uma simplificação.
 *Nem todas as situações foram testadas. Caso encontre alguma divergência, por favor, sinta-se à vontade para
 fazer um pull request*
 
-# Exemplos
+## Exemplos
 
 ```php
 $fonema = new \ByJG\FonemaBR();
@@ -24,7 +24,7 @@ $fonema->converte('brazilia');
 $fonema->converte('brasil');
 ```
 
-# Sugestão de usos:
+## Sugestão de usos:
 
 Uma possível utilização é criar um segundo campo no banco de dados no qual o fonema será armazenado. 
 Sempre que salvar a palavra original você também salva a palavra com fonema.

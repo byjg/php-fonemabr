@@ -10,16 +10,57 @@ class FonemaBR
     public function getRules()
     {
         $rules = new Rules();
+
         $rules
-            ->add(" ", " ", true)
+            ->addPreRuleBeforeAll("(ç|Ç)", "SS");
+
+        $rules
+            ->addPreRule("A{2,}", "A")
+            ->addPreRule("B{2,}", "B")
+            ->addPreRule("C{2,}", "C")
+            ->addPreRule("D{2,}", "D")
+            ->addPreRule("E{2,}", "E")
+            ->addPreRule("F{2,}", "F")
+            ->addPreRule("G{2,}", "G")
+            ->addPreRule("H{2,}", "H")
+            ->addPreRule("I{2,}", "I")
+            ->addPreRule("J{2,}", "J")
+            ->addPreRule("K{2,}", "K")
+            ->addPreRule("L{2,}", "L")
+            ->addPreRule("M{2,}", "M")
+            ->addPreRule("N{2,}", "N")
+            ->addPreRule("O{2,}", "O")
+            ->addPreRule("P{2,}", "P")
+            ->addPreRule("Q{2,}", "Q")
+            ->addPreRule("R+([^AEIOU])", "R\$1")
+            ->addPreRule("R{2,}([AEIOU])", "RR\$1")
+            ->addPreRule("S{2,}([BCDFGHJKLMNPQRSTVWXZ])", "S\$1")
+            ->addPreRule("S{2,}([AEIOUY])", "SS\$1")
+            ->addPreRule("T{2,}", "T")
+            ->addPreRule("U{2,}", "U")
+            ->addPreRule("V{2,}", "V")
+            ->addPreRule("W{2,}", "W")
+            ->addPreRule("X{2,}", "X")
+            ->addPreRule("Y{2,}", "Y")
+            ->addPreRule("Z{2,}", "Z");
+
+        $rules
+            ->add("AO$", "AUM")
+            ->add("AOS$", "AUM")
+            ->add("AE$", "AUM")
+            ->add("AES$", "AUM")
             ->add("B", "B", true)
-            ->add("C", "K", true)
+            ->add("CA", "KA")
+            ->add("CL", "KL", true)
             ->add("CH", "X", true)
-            ->add("CE", "SSE", true)
-            ->add("CI", "SSI", true)
-            ->add("CC", "KSS", true)
-            ->add("D", "D", true)
-            ->add("^ES", "EX", true)
+            ->add("CE", "SSE")
+            ->add("CI", "SSI")
+            ->add("CO", "KO")
+            ->add("CU", "KU")
+            ->add("C([^AEIOU])", "K{1}")
+            ->add("D", "D")
+            ->add("^ES", "EX")
+            ->add("^EX", "EZ", true)
             ->addSame("^EX", "^ES")
             ->add("F", "F", true)
             ->add("GA", "GA", false)
@@ -28,23 +69,15 @@ class FonemaBR
             ->add("GO", "GO", false)
             ->add("GU", "GU", true)
             ->add("GH", "G", true)
-            ->add("G", "G", true)
-            ->add("H", "", true)
+            ->add("^H", "", true)
             ->add("J", "J", true)
-            ->addSame("K", "C")
             ->add("L", "L", true)
-            ->add("NA", "NA", true)
-            ->add("NE", "NE", true)
-            ->add("NI", "NI", true)
-        ;
-
-        $rules
-            ->add("NO", "NO", true)
-            ->add("NU", "NU", true)
-            ->add("NH", "N", true)
-            ->add("N", "M", false)
+            ->add("N", "N", true)
+            ->add("NH", "NH", true)
             ->add("N$", "M", false)
+            ->add("N", "M")
             ->add("M", "M", true)
+            ->add("OES$", "AUM")
             ->add("PH", "F", true)
             ->add("P", "P", true)
             ->add("Q", "K", false)
@@ -54,12 +87,13 @@ class FonemaBR
             ->add("SX", "X", true)
             ->add("SS", "SS", true)
             ->add("SH", "X", true)
-            ->add("^SA", "SSA", false)
-            ->add("^SE", "SSE", false)
-            ->add("^SI", "SSI", false)
-            ->add("^SO", "SSO", false)
-            ->add("^SU", "SSU", false)
+            ->add("^SA", "SA", false)
+            ->add("^SE", "CE", false)
+            ->add("^SI", "CI", false)
+            ->add("^SO", "SO", false)
+            ->add("^SU", "SU", false)
             ->add("S", "Z", true)
+            ->add("S$", "Z")
             ->add("T", "T", true)
             ->add("V", "V", true)
             ->add("X", "X", true)
@@ -72,12 +106,7 @@ class FonemaBR
             ->add("WO", "VO", false)
             ->add("WU", "VU", false)
             ->add("W", "U", true)
-            ->add("Z", "S", true)
-            ->add("ZA", "ZA", false)
-            ->add("ZE", "ZE", false)
-            ->add("ZI", "ZI", false)
-            ->add("ZO", "ZO", false)
-            ->add("ZU", "ZU", false)
+            ->add("Y", "I")
         ;
 
         return $rules;
@@ -89,38 +118,6 @@ class FonemaBR
      */
     public function convert($text)
     {
-        $rules = $this->getRules();
-
-        $text = strtoupper(FromUTF8::onlyAscii(FromUTF8::removeAccent($text)));
-        $result = "";
-
-        $ipos = 0;
-        $expectVogal = true;
-        while ($ipos < strlen($text)) {
-            $first = (($ipos > 0) ? "" : '^');
-            $previous = (($ipos > 0) ? $text[$ipos - 1] : '^');
-            $current = $text[$ipos];
-            $next = isset($text[$ipos + 1]) ? $text[$ipos + 1] : '$';
-
-            if ($current === $previous) {
-                $ipos += 1;
-                continue;
-            }
-
-            $rule = $rules->get($first, $current, $next);
-            if ($expectVogal && $rule["move"] === 1 && strpos("AEIOU", $current) !== false) {
-                $rule = [
-                    "default" => $current,
-                    "move" => 1,
-                    "vogal" => true
-                ];
-            }
-
-            $result .= $rule["default"];
-            $ipos += $rule["move"];
-            $expectVogal = $rule["vogal"];
-        }
-
-        return $result;
+        return $this->getRules()->parse($text);
     } // END_METHOD
 }

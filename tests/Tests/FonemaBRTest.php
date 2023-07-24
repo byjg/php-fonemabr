@@ -20,17 +20,17 @@ class FonemaBRTest extends \PHPUnit\Framework\TestCase
             [ "fome", "FOME" ],
             [ "fama", "FAMA" ],
             [ "ffffffammmmmmmmmma", "FAMA" ],
+            [ "aviao", "AVIAUM" ],
             [ "enfase", "EMFAZE" ],
             [ "emfase", "EMFAZE" ],
             [ "pitomba", "PITOMBA" ],
             [ "pitonba", "PITOMBA" ],
-            [ "praça", "PRAKA" ],
-            [ "praças", "PRAKAZ" ],
-            [ "PRAÇA", "PRAKA" ],
+            [ "praça", "PRASSA" ],
+            [ "praças", "PRASSAZ" ],
             [ "vago", "VAGO" ],
             [ "vigor", "VIGO" ],
             [ "vagrant", "VAGRAMT" ],
-            [ "arranhado", "ARRANADO" ],
+            [ "arranhado", "ARRANHADO" ],
             [ "arranado", "ARRANADO" ],
             [ "brazilia", "BRAZILIA" ],
             [ "brasilia", "BRAZILIA" ],
@@ -43,14 +43,18 @@ class FonemaBRTest extends \PHPUnit\Framework\TestCase
             [ "esclarecido", "EXKLARESSIDO" ],
             [ "mexe", "MEXE" ],
             [ "mesa", "MEZA" ],
-            [ "caça", "KAKA" ],
+            [ "caça", "KASSA" ],
             [ "casa", "KAZA" ],
-            [ "SAPO", "SSAPO" ],
-            [ "pesca", "PEZKA" ],
-            [ "facção", "FAKSSAO" ],
-            [ "sessão", "SSESSAO" ],
-            [ "seção", "SSEKAO" ],
+            [ "SAPO", "SAPO" ],
+            [ "pesca", "PESKA" ],
+            [ "facção", "FAKSSAUM" ],
+            [ "sessão", "CESSAUM" ],
+            [ "seção", "CESSAUM" ],
             [ "áéíóúàèìòùãẽĩõũâêîôûäëïöü", "AEIOUAEIOUAOUAEIOUAEIOU" ],
+            ["pães", "PAUM"],
+            ["pão", "PAUM"],
+            ["avião", "AVIAUM"],
+            ["aviões", "AVIAUM"],
         ];
     }
 
@@ -62,7 +66,7 @@ class FonemaBRTest extends \PHPUnit\Framework\TestCase
     public function testFonema($input, $expected)
     {
         $fonema = new FonemaBR();
-        $result = $fonema->convert($input);
-        $this->assertEquals($expected, $result);
+        $actual = $fonema->convert($input);
+        $this->assertEquals($expected, $actual);
     }
 }
