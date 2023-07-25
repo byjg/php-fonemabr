@@ -2,16 +2,12 @@
 
 namespace Tests;
 
-use ByJG\WordProcess\Brazil\Phoneme;
-use ByJG\WordProcess\Brazil\Soundex;
+use ByJG\WordProcess\Portuguese\Metaphone;
+use ByJG\WordProcess\Portuguese\Soundex;
 
-if (!class_exists('\PHPUnit\Framework\TestCase')) {
-    class_alias('\PHPUnit_Framework_TestCase', '\PHPUnit\Framework\TestCase');
-}
-
-class PhonemeBRTest extends \PHPUnit\Framework\TestCase
+class MetaphoneBRTest extends \PHPUnit\Framework\TestCase
 {
-    public function dataProvider()
+    public function dataProviderMetaphone()
     {
         return [
             [ "ambulancia", "AMBULAMSSIA" ],
@@ -40,8 +36,8 @@ class PhonemeBRTest extends \PHPUnit\Framework\TestCase
             [ "chave", "XAVE" ],
             [ "chavear", "XAVEA" ],
             [ "chuva", "XUVA" ],
-            [ "exclarecido", "EXKLARESSIDO" ],
-            [ "esclarecido", "EXKLARESSIDO" ],
+            [ "exclarecido", "ESKLARESSIDO" ],
+            [ "esclarecido", "ESKLARESSIDO" ],
             [ "mexe", "MEXE" ],
             [ "mesa", "MEZA" ],
             [ "caça", "KASSA" ],
@@ -56,29 +52,66 @@ class PhonemeBRTest extends \PHPUnit\Framework\TestCase
             ["pão", "PAUM"],
             ["avião", "AVIAUM"],
             ["aviões", "AVIAUM"],
-            ["Ana Carolina Kuhnen", 'a']
+            ["queijo", "KEIJO"],
+            ["boqueira", "BOKEIRA"],
+            ["danilo", "DANILO"],
+            ["marilene", "MARILENE"],
+            ['gelo', 'JELO'],
+            ['gola', 'GOLA'],
+            ["gueixa", "GUEIXA"],
+            ["gheixa", "GUEIXA"],
+            ["wellington", "UELINTOM"],
         ];
     }
 
     /**
-     * @dataProvider dataProvider
+     * @dataProvider dataProviderMetaphone
      * @param $input
      * @param $expected
      */
-    public function testFonema($input, $expected)
+    public function testMetaphone($input, $expected)
     {
-        $fonema = new Phoneme();
+        $fonema = new Metaphone();
         $actual = $fonema->convert($input);
         $this->assertEquals($expected, $actual);
     }
 
+    public function dataProviderSoudex()
+    {
+        return [
+            ["N200", "nike"],
+            ["N200", "niky,"],
+            ["N200", "niki,"],
+            ["N200", "nyke,"],
+            ["N200", "naique"],
+            ["M452", "melancia"],
+            ["M452", "melansia,"],
+            ["M452", "melanssia"],
+            ["M240", "Michael"],
+            ["M240", "Maichael,"],
+            ["M240", "Mychael"],
+            ["J250", "Jackson"],
+            ["J250", "Jacksom,"],
+            ["J250", "Jeckson"],
+            ["M650", "marrom"],
+            ["M650", "marron,"],
+            ["M650", "maron,"],
+            ["M650", "marom"],
+            ["U453", "wellington"],
+            ["U453", "uelintom"],
+            ["K200", "casa"],
+            ["K200", "caça"],
+            ["K200", "caçar"],
+        ];
+    }
+    
     /**
-     * @dataProvider dataProvider
+     * @dataProvider dataProviderSoudex
      * @param $input
      * @param $expected
      */
-    public function testSoundex($input, $expected)
+    public function testSoundex($expected, $input)
     {
-        $this->assertEquals($input, Soundex::process($input));
+        $this->assertEquals($expected, Soundex::process($input));
     }
 }

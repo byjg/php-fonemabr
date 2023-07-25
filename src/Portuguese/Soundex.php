@@ -1,12 +1,12 @@
 <?php
 
-namespace ByJG\WordProcess\Brazil;
+namespace ByJG\WordProcess\Portuguese;
 
 class Soundex
 {
     public static function process($text)
     {
-        $phoneme = new Phoneme();
+        $phoneme = new Metaphone();
         $text = $phoneme->convert($text);
 
         $soundexMap = [

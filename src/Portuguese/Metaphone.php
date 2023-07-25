@@ -1,10 +1,10 @@
 <?php
 
-namespace ByJG\WordProcess\Brazil;
+namespace ByJG\WordProcess\Portuguese;
 
 use ByJG\WordProcess\Rules;
 
-class Phoneme
+class Metaphone
 {
 
     public function getRules()
@@ -42,7 +42,9 @@ class Phoneme
             ->addPreRule("W{2,}", "W")
             ->addPreRule("X{2,}", "X")
             ->addPreRule("Y{2,}", "Y")
-            ->addPreRule("Z{2,}", "Z");
+            ->addPreRule("Z{2,}", "Z")
+            ->addPreRule("Y", "I")
+        ;
 
         $rules
             ->add("AO$", "AUM")
@@ -50,30 +52,24 @@ class Phoneme
             ->add("AE$", "AUM")
             ->add("AES$", "AUM")
             ->add("B", "B", true)
-            ->add("CA", "KA")
+            ->add("C([AOU])", "K{1}")
+            ->add("C([EI])", "SS{1}")
             ->add("CL", "KL", true)
             ->add("CH", "X", true)
-            ->add("CE", "SSE")
-            ->add("CI", "SSI")
-            ->add("CO", "KO")
-            ->add("CU", "KU")
             ->add("C([^AEIOU])", "K{1}")
             ->add("D", "D")
-            ->add("^ES", "EX")
+            ->add("^EX", "ES")
             ->add("^EX", "EZ", true)
-            ->addSame("^EX", "^ES")
             ->add("F", "F", true)
-            ->add("GA", "GA", false)
-            ->add("GE", "JE", false)
-            ->add("GI", "JI", false)
-            ->add("GO", "GO", false)
-            ->add("GU", "GU", true)
-            ->add("GH", "G", true)
+            ->add("G([AOU])", "G{1}", false)
+            ->add("G([EI])", "J{1}", false)
+            ->add("GH", "GU", true)
             ->add("^H", "", true)
             ->add("H([^AEIOU])", "{1}")
             ->add("J", "J", true)
             ->add("L", "L", true)
             ->add("LH", "LH", true)
+            ->add("NG", "N")
             ->add("N", "N", true)
             ->add("NH", "NH", true)
             ->add("N$", "M", false)
@@ -82,6 +78,7 @@ class Phoneme
             ->add("OES$", "AUM")
             ->add("PH", "F", true)
             ->add("P", "P", true)
+            ->add("QU", "K", true)
             ->add("Q", "K", false)
             ->add("R", "R", true)
             ->add("RR", "RR", true)
@@ -99,16 +96,8 @@ class Phoneme
             ->add("T", "T", true)
             ->add("V", "V", true)
             ->add("X", "X", true)
-            ->add("WA", "VA", false)
-        ;
-
-        $rules
-            ->add("WE", "VE", false)
-            ->add("WI", "VI", false)
-            ->add("WO", "VO", false)
-            ->add("WU", "VU", false)
-            ->add("W", "U", true)
-            ->add("Y", "I")
+            ->add("^W", "U", true)
+            ->add("W", "V", true)
         ;
 
         return $rules;
