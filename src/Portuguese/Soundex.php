@@ -9,6 +9,10 @@ class Soundex
         $phoneme = new Metaphone();
         $text = $phoneme->convert($text);
 
+        if (empty($text)) {
+            return "";
+        }
+
         $soundexMap = [
             "1" => "BFPV",
             "2" => "CGJKQSXZ",
