@@ -3,6 +3,7 @@
   "license": "MIT",
   "description": "O Fonema BR tem por objetivo criar uma simplificação de palavras de tal forma que erros de ortografia e vogais não interfiram na busca",
   "require": {
+    "php": ">=7.4",
     "byjg/convert": "4.9.*"
   },
   "require-dev": {

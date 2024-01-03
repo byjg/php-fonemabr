@@ -2,13 +2,8 @@
 
 namespace ByJG\WordProcess\Portuguese;
 
-// @todo remove this dependency in PHP 8
-if (!function_exists('str_contains')) {
-    function str_contains($haystack, $needle)
-    {
-        return strpos($haystack, $needle) !== false;
-    }
-}
+
+use ByJG\WordProcess\Php80;
 
 class Soundex
 {
@@ -34,7 +29,7 @@ class Soundex
 
         for ($i = 1; $i < strlen($text); $i++) {
             foreach ($soundexMap as $key => $value) {
-                if (str_contains($value, $text[$i]) && !str_ends_with($soundexCode, $key)) {
+                if (Php80::str_contains($value, $text[$i]) && !Php80::str_ends_with($soundexCode, $key)) {
                     $soundexCode = $soundexCode . $key;
                     if (strlen($soundexCode) == 4) {
                         return $soundexCode;

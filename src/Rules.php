@@ -64,7 +64,7 @@ class Rules
 
     public function parse($text)
     {
-        if (str_contains($text, " ")) {
+        if (Php80::str_contains($text, " ")) {
             $words = explode(" ", $text);
             $result = [];
             foreach ($words as $word) {
