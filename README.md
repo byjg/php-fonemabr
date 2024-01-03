@@ -1,7 +1,10 @@
 # Fonema BR
 
-[![Opensource ByJG](https://img.shields.io/badge/opensource-byjg.com-brightgreen.svg)](http://opensource.byjg.com)
-[![Build Status](https://travis-ci.com/byjg/fonemabr.svg?branch=master)](https://travis-ci.com/byjg/fonemabr)
+[![Build Status](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml) 
+[![Opensource ByJG](https://img.shields.io/badge/opensource-byjg-success.svg)](http://opensource.byjg.com) 
+[![GitHub source](https://img.shields.io/badge/Github-source-informational?logo=github)](https://github.com/byjg/php-fonemabr/) 
+[![GitHub license](https://img.shields.io/github/license/byjg/php-fonemabr.svg)](https://opensource.byjg.com/opensource/licensing.html) 
+[![GitHub release](https://img.shields.io/github/release/byjg/php-fonemabr.svg)](https://github.com/byjg/php-fonemabr/releases/)
 
 O Fonema BR tem por objetivo criar uma simplificação de palavras de tal forma que erros de ortografia e
 vogais não interfiram na busca. Dessa forma, é possível criar sistemas de buscas mais aproximados com o 
@@ -40,3 +43,12 @@ Sempre que salvar a palavra original você também salva a palavra com fonema.
 
 Dessa forma você poderá pesquisar tanto a palavra original quanto a palavra simplifica com o Fonema.
 
+## Dependencies
+
+```mermaid
+flowchart TD
+    byjg/fonemabr --> byjg/convert
+```
+
+----
+[Open source ByJG](http://opensource.byjg.com)
