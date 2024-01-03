@@ -15,13 +15,22 @@ fazer um pull request*
 
 ## Exemplos
 
-```php
-$fonema = new \ByJG\BR\FonemaBR();
+### Metafone
 
-// Abaixo, será produzido o mesmo resultado: BRZL
-$fonema->converte('brasília');
-$fonema->converte('brazilia');
-$fonema->converte('brasil');
+```php
+$metaphone = new \ByJG\WordProcess\Portuguese\Metaphone();
+
+echo $metaphone->convert('brasília');
+echo $metaphone->convert('brazilia');
+```
+
+### Soundex
+
+```php
+$soundex = new \ByJG\WordProcess\Portuguese\Soundex();
+echo $soundex->process('brasília');
+echo $soundex->process('brazilia');
+echo $soundex->process('brasil');
 ```
 
 ## Sugestão de usos:
