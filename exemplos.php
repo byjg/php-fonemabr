@@ -2,7 +2,7 @@
 
 require 'vendor/autoload.php';
 
-$fonema = new \ByJG\FonemaBR();
+$fonema = new \ByJG\BR\FonemaBR();
 
 $lista = [
     "ambulancia",
