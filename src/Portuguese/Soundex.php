@@ -26,6 +26,10 @@ class Soundex
         $soundexCode = $text[0];
 
         for ($i = 1; $i < strlen($text); $i++) {
+            /**
+             * @var string $key
+             * @var string $value
+             */
             foreach ($soundexMap as $key => $value) {
                 if (str_contains($value, $text[$i]) && !str_ends_with($soundexCode, $key)) {
                     $soundexCode = $soundexCode . $key;
