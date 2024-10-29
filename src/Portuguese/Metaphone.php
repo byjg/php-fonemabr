@@ -8,7 +8,7 @@ use ByJG\WordProcess\Rules;
 class Metaphone
 {
 
-    public function getRules()
+    public function getRules(): Rules
     {
         $rules = new Rules();
 
@@ -105,10 +105,10 @@ class Metaphone
     }
 
     /**
-     * @param $text
+     * @param string $text
      * @return string
      */
-    public function convert($text)
+    public function convert(string $text): string
     {
         return $this->getRules()->parse($text);
     } // END_METHOD

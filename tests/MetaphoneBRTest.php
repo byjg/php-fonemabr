@@ -7,7 +7,10 @@ use ByJG\WordProcess\Portuguese\Soundex;
 
 class MetaphoneBRTest extends \PHPUnit\Framework\TestCase
 {
-    public function dataProviderMetaphone()
+    /**
+     * @return array
+     */
+    public function dataProviderMetaphone(): array
     {
         return [
             [ "ambulancia", "AMBULAMSSIA" ],
@@ -66,17 +69,21 @@ class MetaphoneBRTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider dataProviderMetaphone
+     *
      * @param $input
      * @param $expected
      */
-    public function testMetaphone($input, $expected)
+    public function testMetaphone($input, $expected): void
     {
         $fonema = new Metaphone();
         $actual = $fonema->convert($input);
         $this->assertEquals($expected, $actual);
     }
 
-    public function dataProviderSoudex()
+    /**
+     * @return array
+     */
+    public function dataProviderSoudex(): array
     {
         return [
             ["N200", "nike"],
@@ -107,10 +114,11 @@ class MetaphoneBRTest extends \PHPUnit\Framework\TestCase
     
     /**
      * @dataProvider dataProviderSoudex
+     *
      * @param $input
      * @param $expected
      */
-    public function testSoundex($expected, $input)
+    public function testSoundex($expected, $input): void
     {
         $this->assertEquals($expected, Soundex::process($input));
     }

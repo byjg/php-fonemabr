@@ -3,11 +3,9 @@
 namespace ByJG\WordProcess\Portuguese;
 
 
-use ByJG\WordProcess\Php80;
-
 class Soundex
 {
-    public static function process($text)
+    public static function process($text): string
     {
         $phoneme = new Metaphone();
         $text = $phoneme->convert($text);
@@ -28,8 +26,12 @@ class Soundex
         $soundexCode = $text[0];
 
         for ($i = 1; $i < strlen($text); $i++) {
+            /**
+             * @var string $key
+             * @var string $value
+             */
             foreach ($soundexMap as $key => $value) {
-                if (Php80::str_contains($value, $text[$i]) && !Php80::str_ends_with($soundexCode, $key)) {
+                if (str_contains($value, $text[$i]) && !str_ends_with($soundexCode, $key)) {
                     $soundexCode = $soundexCode . $key;
                     if (strlen($soundexCode) == 4) {
                         return $soundexCode;

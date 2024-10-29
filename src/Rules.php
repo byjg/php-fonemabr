@@ -6,24 +6,24 @@ use ByJG\Convert\FromUTF8;
 
 class Rules
 {
-    public $preRulesBeforeAll = [];
-    public $preRules = [];
-    public $rulesBegin = [];
-    public $rulesList = [];
-    public $rulesEnd = [];
+    public array $preRulesBeforeAll = [];
+    public array $preRules = [];
+    public array $rulesBegin = [];
+    public array $rulesList = [];
+    public array $rulesEnd = [];
 
-    public function addPreRule($char, $value)
+    public function addPreRule(string $char, string $value): static
     {
         $this->preRules[$char] = $value;
         return $this;
     }
-    public function addPreRuleBeforeAll($char, $value)
+    public function addPreRuleBeforeAll(string $char, string $value): static
     {
         $this->preRulesBeforeAll[$char] = $value;
         return $this;
     }
 
-    public function add($char, $value, $vogal = false)
+    public function add(string $char, string $value, $vogal = false): static
     {
         if ($vogal) {
             $char = "$char([AEIOU])";
@@ -35,7 +35,7 @@ class Rules
             return $this;
         }
 
-        if (substr($char, -1) == "$") {
+        if (str_ends_with($char, "$")) {
             $this->rulesEnd[$char] = $value;
             return $this;
         }
@@ -45,14 +45,14 @@ class Rules
         return $this;
     }
 
-    public function addSame($char, $sameAs)
+    public function addSame(string $char, string $sameAs): static
     {
         if ($char[0] == "^") {
             $this->rulesBegin[$char] = $this->rulesBegin[$sameAs];
             return $this;
         }
 
-        if (substr($char, -1) == "$") {
+        if (str_ends_with($char, "$")) {
             $this->rulesEnd[$char] = $this->rulesEnd[$sameAs];
             return $this;
         }
@@ -62,9 +62,9 @@ class Rules
         return $this;
     }
 
-    public function parse($text)
+    public function parse(string $text): string
     {
-        if (Php80::str_contains($text, " ")) {
+        if (str_contains($text, " ")) {
             $words = explode(" ", $text);
             $result = [];
             foreach ($words as $word) {
@@ -95,7 +95,7 @@ class Rules
         return $beginText . $parsedText . $endText;
     }
 
-    protected function findAndReplaceRulesSimple($ruleList, $text)
+    protected function findAndReplaceRulesSimple(array $ruleList, string $text): string
     {
         foreach ($ruleList as $char => $value) {
             $text = preg_replace("/$char/", $value, $text);
@@ -103,7 +103,13 @@ class Rules
         return $text;
     }
 
-    protected function findAndReplaceRules($ruleList, $text, $fromBegin = false)
+    /**
+     * @param array $ruleList
+     * @param string $text
+     * @param bool $fromBegin
+     * @return array
+     */
+    protected function findAndReplaceRules(array $ruleList, string $text, bool $fromBegin = false): array
     {
         $newText = "";
         foreach ($ruleList as $rule => $value) {
@@ -119,7 +125,12 @@ class Rules
         return [$newText, $text];
     }
 
-    protected function replaceText($text, $matches)
+    /**
+     * @param string $text
+     * @param array $matches
+     * @return string
+     */
+    protected function replaceText(string $text, array $matches): string
     {
         $result = $text;
         foreach ($matches as $key => $value) {
