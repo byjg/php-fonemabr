@@ -98,7 +98,7 @@ class Rules
     protected function findAndReplaceRulesSimple(array $ruleList, string $text): string
     {
         foreach ($ruleList as $char => $value) {
-            $text = preg_replace("/$char/", $value, $text);
+            $text = preg_replace("/$char/", $value, $text) ?? $text;
         }
         return $text;
     }
