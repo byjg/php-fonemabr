@@ -10,7 +10,7 @@ class MetaphoneBRTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function dataProviderMetaphone(): array
+    public static function dataProviderMetaphone(): array
     {
         return [
             [ "ambulancia", "AMBULAMSSIA" ],
@@ -67,12 +67,7 @@ class MetaphoneBRTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    /**
-     * @dataProvider dataProviderMetaphone
-     *
-     * @param $input
-     * @param $expected
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProviderMetaphone')]
     public function testMetaphone($input, $expected): void
     {
         $fonema = new Metaphone();
@@ -83,7 +78,7 @@ class MetaphoneBRTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function dataProviderSoudex(): array
+    public static function dataProviderSoudex(): array
     {
         return [
             ["N200", "nike"],
@@ -112,12 +107,7 @@ class MetaphoneBRTest extends \PHPUnit\Framework\TestCase
         ];
     }
     
-    /**
-     * @dataProvider dataProviderSoudex
-     *
-     * @param $input
-     * @param $expected
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProviderSoudex')]
     public function testSoundex($expected, $input): void
     {
         $this->assertEquals($expected, Soundex::process($input));
