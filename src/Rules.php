@@ -75,7 +75,7 @@ class Rules
 
         // Prepare the text
         $text = $this->findAndReplaceRulesSimple($this->preRulesBeforeAll, strtoupper($text));
-        $text = $this->findAndReplaceRulesSimple($this->preRules, strtoupper(FromUTF8::onlyAscii(FromUTF8::removeAccent($text))));
+        $text = $this->findAndReplaceRulesSimple($this->preRules, strtoupper(FromUTF8::onlyAscii(FromUTF8::removeAccent($text)) ?? ''));
 
         // Parse the text
         list($beginText, $text) = $this->findAndReplaceRules($this->rulesBegin, $text);
