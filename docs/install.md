@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ## Requirements
 
-- PHP 8.1 or higher
+- PHP 8.3 or higher
 
 ## Installing via Composer
 
