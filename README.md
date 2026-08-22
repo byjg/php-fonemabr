@@ -1,4 +1,13 @@
+---
+sidebar_key: fonemabr
+tags: [php, text-manipulation, text-classification]
+---
+
 # Fonema BR
+
+O Fonema BR tem por objetivo criar uma simplificação de palavras de tal forma que erros de ortografia e
+vogais não interfiram na busca. Dessa forma, é possível criar sistemas de buscas mais aproximados com o
+brasileiro e aumentar a assertividade da busca.
 
 [![Sponsor](https://img.shields.io/badge/Sponsor-%23ea4aaa?logo=githubsponsors&logoColor=white&labelColor=0d1117)](https://github.com/sponsors/byjg)
 [![Build Status](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml)
@@ -6,10 +15,6 @@
 [![GitHub source](https://img.shields.io/badge/Github-source-informational?logo=github)](https://github.com/byjg/php-fonemabr/)
 [![GitHub license](https://img.shields.io/github/license/byjg/php-fonemabr.svg)](https://opensource.byjg.com/opensource/licensing.html)
 [![GitHub release](https://img.shields.io/github/release/byjg/php-fonemabr.svg)](https://github.com/byjg/uri/releases/)
-
-O Fonema BR tem por objetivo criar uma simplificação de palavras de tal forma que erros de ortografia e
-vogais não interfiram na busca. Dessa forma, é possível criar sistemas de buscas mais aproximados com o
-brasileiro e aumentar a assertividade da busca.
 
 **Observação**: Apesar do nome "Fonema" a classe não é uma representação fiel dos fonemas brasileiros sendo
 apenas uma simplificação.
