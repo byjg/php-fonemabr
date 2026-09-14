@@ -13,7 +13,7 @@ brasileiro e aumentar a assertividade da busca.
 [![Build Status](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml)
 [![Opensource ByJG](https://img.shields.io/badge/opensource-byjg-success.svg)](http://opensource.byjg.com)
 [![GitHub source](https://img.shields.io/badge/Github-source-informational?logo=github)](https://github.com/byjg/php-fonemabr/)
-[![GitHub license](https://img.shields.io/github/license/byjg/php-fonemabr.svg)](https://opensource.byjg.com/opensource/licensing.html)
+[![GitHub license](https://img.shields.io/github/license/byjg/php-fonemabr.svg)](https://opensource.byjg.com/license/)
 [![GitHub release](https://img.shields.io/github/release/byjg/php-fonemabr.svg)](https://github.com/byjg/uri/releases/)
 
 **Observação**: Apesar do nome "Fonema" a classe não é uma representação fiel dos fonemas brasileiros sendo
@@ -63,13 +63,6 @@ Sempre que salvar a palavra original você também salva a palavra com fonema.
 Dessa forma você poderá pesquisar tanto a palavra original quanto a palavra simplifica com o Fonema.
 
 [More details and examples](docs/use-cases.md)
-
-## Dependencies
-
-```mermaid
-flowchart TD
-    byjg/fonemabr --> byjg/convert
-```
 
 ----
 [Open source ByJG](http://opensource.byjg.com)
