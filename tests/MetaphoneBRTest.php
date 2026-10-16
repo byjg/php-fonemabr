@@ -53,7 +53,7 @@ class MetaphoneBRTest extends \PHPUnit\Framework\TestCase
             [ "facção", "FAKSSAUM" ],
             [ "sessão", "CESSAUM" ],
             [ "seção", "CESSAUM" ],
-            [ "áéíóúàèìòùãẽĩõũâêîôûäëïöü", "AEIOUAEIOUAOUAEIOUAEIOU" ],
+            [ "áéíóúàèìòùãẽĩõũâêîôûäëïöü", "AEIOUAEIOUAEIOUAEIOUAEIOU" ],
             ["pães", "PAUM"],
             ["pão", "PAUM"],
             ["avião", "AVIAUM"],

@@ -45,6 +45,15 @@ registered first, so it consumed every `^EX`, and the vowel rule never fired.
 Portuguese voices *ex* before a vowel (*e-ZA-me*) but not before a consonant, so the specific rule
 must be registered before the general one. Words such as `exclarecido` are unaffected.
 
+### Accented vowels outside Latin-1 were dropped
+
+`byjg/convert` 7.0 removes the accent of every Latin letter, not only the Latin-1 ones. Vowels
+such as `ẽ` and `ĩ` became `?` and were then removed; they now keep their vowel.
+
+| Input | Before | After |
+|---|---|---|
+| `ẽ`, `ĩ` | (dropped) | `E`, `I` |
+
 ## Requirements
 
 - PHP 8.3, 8.4, 8.5 and 8.6 are now supported: `"php": ">=8.3 <8.7"`.
