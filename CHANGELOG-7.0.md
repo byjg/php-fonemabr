@@ -89,3 +89,5 @@ While 7.0 is unreleased these resolve to `7.0.x-dev` from each component's
 ## Housekeeping
 
 - `phpunit.xml.dist` renamed to `phpunit.xml`.
+- `exemplos.php` removed. It used the `ByJG\BR\FonemaBR` class, which no longer exists; the examples
+  are in the README and `docs/`.

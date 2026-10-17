@@ -23,14 +23,6 @@ apenas uma simplificação.
 *Nem todas as situações foram testadas. Caso encontre alguma divergência, por favor, sinta-se à vontade para
 fazer um pull request*
 
-## Installation
-
-```bash
-composer require byjg/fonemabr
-```
-
-[More details](docs/install.md)
-
 ## Exemplos
 
 ### Metafone
@@ -56,6 +48,18 @@ echo Soundex::process('brasil');   // Output: B625
 
 [More details](docs/soundex.md)
 
+### Stemmer
+
+```php
+use ByJG\WordProcess\Portuguese\Stemmer;
+
+$stemmer = new Stemmer();
+echo $stemmer->stem('correndo'); // Output: corr
+echo $stemmer->stem('correram'); // Output: corr
+```
+
+[More details](docs/stemmer.md)
+
 ## Use Cases
 
 Uma possível utilização é criar um segundo campo no banco de dados no qual o fonema será armazenado.
@@ -64,6 +68,14 @@ Sempre que salvar a palavra original você também salva a palavra com fonema.
 Dessa forma você poderá pesquisar tanto a palavra original quanto a palavra simplifica com o Fonema.
 
 [More details and examples](docs/use-cases.md)
+
+## Installation
+
+```bash
+composer require byjg/fonemabr
+```
+
+[More details](docs/install.md)
 
 ## Running Tests
 
