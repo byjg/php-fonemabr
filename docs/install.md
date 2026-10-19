@@ -16,7 +16,7 @@ composer require byjg/fonemabr
 
 ## Getting Started
 
-After installation, you can immediately start using the Metaphone and Soundex classes:
+After installation, you can immediately start using the Metaphone, Soundex and Stemmer classes:
 
 ```php
 <?php

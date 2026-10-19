@@ -1,29 +1,27 @@
-# Fonema BR
+---
+sidebar_key: fonemabr
+tags: [php, text-manipulation, text-classification]
+---
 
-[![Sponsor](https://img.shields.io/badge/Sponsor-%23ea4aaa?logo=githubsponsors&logoColor=white&labelColor=0d1117)](https://github.com/sponsors/byjg)
-[![Build Status](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml)
-[![Opensource ByJG](https://img.shields.io/badge/opensource-byjg-success.svg)](http://opensource.byjg.com)
-[![GitHub source](https://img.shields.io/badge/Github-source-informational?logo=github)](https://github.com/byjg/php-fonemabr/)
-[![GitHub license](https://img.shields.io/github/license/byjg/php-fonemabr.svg)](https://opensource.byjg.com/opensource/licensing.html)
-[![GitHub release](https://img.shields.io/github/release/byjg/php-fonemabr.svg)](https://github.com/byjg/uri/releases/)
+# Fonema BR
 
 O Fonema BR tem por objetivo criar uma simplificação de palavras de tal forma que erros de ortografia e
 vogais não interfiram na busca. Dessa forma, é possível criar sistemas de buscas mais aproximados com o
 brasileiro e aumentar a assertividade da busca.
+
+[![Sponsor](https://img.shields.io/badge/Sponsor-%23ea4aaa?logo=githubsponsors&logoColor=white&labelColor=0d1117)](https://github.com/sponsors/byjg)
+[![Build Status](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml)
+[![Opensource ByJG](https://img.shields.io/badge/opensource-byjg-success.svg)](https://opensource.byjg.com)
+[![Install MCP Server](https://img.shields.io/badge/Install-MCP_Server-8A2BE2?logo=modelcontextprotocol&logoColor=white)](https://opensource.byjg.com/docs/ai/mcpserver-byjg-docs/)
+[![GitHub source](https://img.shields.io/badge/Github-source-informational?logo=github)](https://github.com/byjg/php-fonemabr/)
+[![GitHub license](https://img.shields.io/github/license/byjg/php-fonemabr.svg)](https://opensource.byjg.com/license/)
+[![GitHub release](https://img.shields.io/github/release/byjg/php-fonemabr.svg)](https://github.com/byjg/php-fonemabr/releases/)
 
 **Observação**: Apesar do nome "Fonema" a classe não é uma representação fiel dos fonemas brasileiros sendo
 apenas uma simplificação.
 
 *Nem todas as situações foram testadas. Caso encontre alguma divergência, por favor, sinta-se à vontade para
 fazer um pull request*
-
-## Installation
-
-```bash
-composer require byjg/fonemabr
-```
-
-[More details](docs/install.md)
 
 ## Exemplos
 
@@ -50,6 +48,18 @@ echo Soundex::process('brasil');   // Output: B625
 
 [More details](docs/soundex.md)
 
+### Stemmer
+
+```php
+use ByJG\WordProcess\Portuguese\Stemmer;
+
+$stemmer = new Stemmer();
+echo $stemmer->stem('correndo'); // Output: corr
+echo $stemmer->stem('correram'); // Output: corr
+```
+
+[More details](docs/stemmer.md)
+
 ## Use Cases
 
 Uma possível utilização é criar um segundo campo no banco de dados no qual o fonema será armazenado.
@@ -59,12 +69,19 @@ Dessa forma você poderá pesquisar tanto a palavra original quanto a palavra si
 
 [More details and examples](docs/use-cases.md)
 
-## Dependencies
+## Installation
 
-```mermaid
-flowchart TD
-    byjg/fonemabr --> byjg/convert
+```bash
+composer require byjg/fonemabr
+```
+
+[More details](docs/install.md)
+
+## Running Tests
+
+```bash
+vendor/bin/phpunit
 ```
 
 ----
-[Open source ByJG](http://opensource.byjg.com)
+[Open source ByJG](https://opensource.byjg.com)
