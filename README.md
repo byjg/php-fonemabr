@@ -5,9 +5,7 @@ tags: [php, text-manipulation, text-classification]
 
 # Fonema BR
 
-O Fonema BR tem por objetivo criar uma simplificação de palavras de tal forma que erros de ortografia e
-vogais não interfiram na busca. Dessa forma, é possível criar sistemas de buscas mais aproximados com o
-brasileiro e aumentar a assertividade da busca.
+Busca que entende o português do Brasil: "brasília" e "brazilia" viram a mesma chave, apesar dos erros de ortografia.
 
 [![Sponsor](https://img.shields.io/badge/Sponsor-%23ea4aaa?logo=githubsponsors&logoColor=white&labelColor=0d1117)](https://github.com/sponsors/byjg)
 [![Build Status](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/byjg/php-fonemabr/actions/workflows/phpunit.yml)
@@ -22,6 +20,23 @@ apenas uma simplificação.
 
 *Nem todas as situações foram testadas. Caso encontre alguma divergência, por favor, sinta-se à vontade para
 fazer um pull request*
+
+## Por quê
+
+O `soundex()` e o `metaphone()` do PHP foram feitos para o inglês. No português, "brasília",
+"brazilia" e "brasil" deveriam ser encontrados juntos, e não são: cada erro de ortografia ou
+de acento vira uma busca sem resultado.
+
+O Fonema BR aplica as regras do português brasileiro. Grave a chave junto com o texto e
+busque pela chave:
+
+```php
+(new Metaphone())->convert('brasília');   // BRAZILIA
+(new Metaphone())->convert('brazilia');   // BRAZILIA
+Soundex::process('brasil');               // B625
+```
+
+Também inclui um stemmer, para buscar "correndo" e "corrida" pela mesma raiz.
 
 ## Exemplos
 
