@@ -1,5 +1,6 @@
 ---
 sidebar_key: fonemabr
+sidebar_category: text-content
 tags: [php, text-manipulation, text-classification]
 ---
 
